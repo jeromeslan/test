@@ -1,0 +1,235 @@
+{
+  "optimizationSets": [
+    {
+      "name": "Conservative_Set",
+      "description": "Configuration conservatrice pour débutants",
+      "parameters": {
+        "RiskPercent": {
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.25
+        },
+        "ATRStopLossMultiplier": {
+          "min": 2.0,
+          "max": 3.5,
+          "step": 0.5
+        },
+        "ADXThreshold": {
+          "min": 25,
+          "max": 35,
+          "step": 5
+        },
+        "RSIPeriod": {
+          "min": 14,
+          "max": 21,
+          "step": 2
+        }
+      },
+      "fixedParameters": {
+        "MaxDailyLossPercent": 5.0,
+        "EnableTrailingStop": true,
+        "MaxPositionsPerSide": 2,
+        "EmaFastPeriod": 21,
+        "EmaSlowPeriod": 50
+      }
+    },
+    {
+      "name": "Balanced_Set",
+      "description": "Configuration équilibrée pour traders intermédiaires",
+      "parameters": {
+        "RiskPercent": {
+          "min": 0.75,
+          "max": 2.0,
+          "step": 0.25
+        },
+        "ATRStopLossMultiplier": {
+          "min": 1.5,
+          "max": 3.0,
+          "step": 0.25
+        },
+        "ATRTrailingStopMultiplier": {
+          "min": 1.0,
+          "max": 2.0,
+          "step": 0.25
+        },
+        "EmaFastPeriod": {
+          "min": 13,
+          "max": 34,
+          "step": 3
+        },
+        "EmaSlowPeriod": {
+          "min": 34,
+          "max": 89,
+          "step": 5
+        },
+        "RSIPeriod": {
+          "min": 10,
+          "max": 21,
+          "step": 2
+        },
+        "ADXThreshold": {
+          "min": 20,
+          "max": 35,
+          "step": 5
+        }
+      },
+      "fixedParameters": {
+        "MaxDailyLossPercent": 7.5,
+        "MaxPositionsPerSide": 3
+      }
+    },
+    {
+      "name": "Aggressive_Set",
+      "description": "Configuration agressive pour traders expérimentés",
+      "parameters": {
+        "RiskPercent": {
+          "min": 1.0,
+          "max": 3.0,
+          "step": 0.5
+        },
+        "ATRStopLossMultiplier": {
+          "min": 1.0,
+          "max": 2.5,
+          "step": 0.25
+        },
+        "ATRTrailingStopMultiplier": {
+          "min": 0.75,
+          "max": 2.0,
+          "step": 0.25
+        },
+        "EmaFastPeriod": {
+          "min": 8,
+          "max": 21,
+          "step": 2
+        },
+        "EmaSlowPeriod": {
+          "min": 21,
+          "max": 55,
+          "step": 3
+        },
+        "RSIPeriod": {
+          "min": 8,
+          "max": 18,
+          "step": 2
+        },
+        "ADXThreshold": {
+          "min": 15,
+          "max": 30,
+          "step": 3
+        },
+        "MaxPositionsPerSide": {
+          "min": 3,
+          "max": 5,
+          "step": 1
+        }
+      },
+      "fixedParameters": {
+        "MaxDailyLossPercent": 10.0,
+        "EnableTrailingStop": true
+      }
+    },
+    {
+      "name": "TakeProfit_Optimization",
+      "description": "Optimisation spécifique des niveaux de take profit",
+      "parameters": {
+        "TP1RiskMultiple": {
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.25
+        },
+        "TP2RiskMultiple": {
+          "min": 1.5,
+          "max": 3.0,
+          "step": 0.25
+        },
+        "TP3RiskMultiple": {
+          "min": 2.5,
+          "max": 5.0,
+          "step": 0.5
+        },
+        "TP1VolumeFraction": {
+          "min": 0.25,
+          "max": 0.45,
+          "step": 0.05
+        },
+        "TP2VolumeFraction": {
+          "min": 0.25,
+          "max": 0.45,
+          "step": 0.05
+        }
+      },
+      "fixedParameters": {
+        "RiskPercent": 1.0,
+        "ATRStopLossMultiplier": 2.0,
+        "MaxDailyLossPercent": 5.0
+      }
+    },
+    {
+      "name": "Session_Optimization",
+      "description": "Optimisation des heures de trading",
+      "parameters": {
+        "StartHourUtc": {
+          "min": 6,
+          "max": 12,
+          "step": 1
+        },
+        "EndHourUtc": {
+          "min": 18,
+          "max": 23,
+          "step": 1
+        }
+      },
+      "fixedParameters": {
+        "RiskPercent": 1.0,
+        "ATRStopLossMultiplier": 2.0,
+        "MaxDailyLossPercent": 5.0,
+        "RSIPeriod": 14,
+        "ADXThreshold": 25,
+        "EmaFastPeriod": 21,
+        "EmaSlowPeriod": 50
+      }
+    }
+  ],
+  "backtestSettings": {
+    "recommendedTimeframes": ["5m", "15m", "1h"],
+    "minimumDataPeriod": "3 months",
+    "recommendedDataPeriod": "6 months",
+    "outOfSamplePeriod": "1 month",
+    "initialDeposit": 10000,
+    "currency": "USD",
+    "symbols": ["BTCUSD", "BTCEUR", "BTCGBP"],
+    "commissionType": "PerTrade",
+    "commission": 7.0
+  },
+  "optimizationCriteria": {
+    "primary": {
+      "metric": "NetProfit",
+      "direction": "maximize"
+    },
+    "secondary": [
+      {
+        "metric": "ProfitFactor",
+        "minValue": 1.2
+      },
+      {
+        "metric": "MaxDrawdown",
+        "maxValue": 0.20
+      },
+      {
+        "metric": "SharpeRatio",
+        "minValue": 1.0
+      },
+      {
+        "metric": "WinRate",
+        "minValue": 0.40
+      }
+    ]
+  },
+  "validationRules": {
+    "minTrades": 50,
+    "maxDrawdown": 0.25,
+    "minProfitFactor": 1.1,
+    "minWinRate": 0.35,
+    "maxConsecutiveLosses": 10
+  }
+}
